@@ -1,0 +1,54 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0">
+
+	<!-- Country Repository Bean -->
+	<bean id="countryCodeRepository" class="com.scb.rdm.repository.impl.CountryRepositoryImpl" activation="eager"
+		init-method="init">
+		<!-- The Entity Manager injected here is the container-managed provided by Aries JPA -->
+		<jpa:context unitname="rdmPersistenceUnit" property="entityManager" />
+	</bean>
+	
+	<!-- Currency Repository Bean -->
+	<bean id="currencyCodeRepository" class="com.scb.rdm.repository.impl.CurrencyRepositoryImpl" activation="eager"
+		init-method="init">
+		<!-- The Entity Manager injected here is the container-managed provided by Aries JPA -->
+		<jpa:context unitname="rdmPersistenceUnit" property="entityManager" />
+	</bean>
+	
+	<!-- StandardCode Repository Bean -->
+	<bean id="standardCodeRepository" class="com.scb.rdm.repository.impl.StandardCodeRepositoryImpl" activation="eager"
+		init-method="init">
+		<!-- The Entity Manager injected here is the container-managed provided by Aries JPA -->
+		<jpa:context unitname="rdmPersistenceUnit" property="entityManager" />
+	</bean>
+	
+	<!-- StandardCodePicklist Repository Bean -->
+	<bean id="standardCodePicklistRepository" class="com.scb.rdm.repository.impl.StandardCodePicklistRepositoryImpl" activation="eager"
+		init-method="init">
+		<!-- The Entity Manager injected here is the container-managed provided by Aries JPA -->
+		<jpa:context unitname="rdmPersistenceUnit" property="entityManager" />
+	</bean>
+	
+	<!-- StandardCodePicklistValue Repository Bean -->
+	<bean id="standardCodePicklistValueRepository" class="com.scb.rdm.repository.impl.StandardCodePicklistValueRepositoryImpl" activation="eager"
+		init-method="init">
+		<!-- The Entity Manager injected here is the container-managed provided by Aries JPA -->
+		<jpa:context unitname="rdmPersistenceUnit" property="entityManager" />
+	</bean>
+
+	<!-- Export Country Repository as the OSGi Service -->
+	<service ref="countryCodeRepository" interface="com.scb.rdm.repository.CountryRepository" />
+
+	<!-- Export Currency Repository as the OSGi Service -->
+	<service ref="currencyCodeRepository" interface="com.scb.rdm.repository.CurrencyRepository" />
+	
+	<!-- Export StandardCode Repository as the OSGi Service -->
+	<service ref="standardCodeRepository" interface="com.scb.rdm.repository.StandardCodeRepository" />
+	
+	<!-- Export StandardCodePicklist Repository as the OSGi Service -->
+	<service ref="standardCodePicklistRepository" interface="com.scb.rdm.repository.StandardCodePicklistRepository" />
+	
+	<!-- Export StandardCodePicklistValue Repository as the OSGi Service -->
+	<service ref="standardCodePicklistValueRepository" interface="com.scb.rdm.repository.StandardCodePicklistValueRepository" />
+	
+</blueprint>

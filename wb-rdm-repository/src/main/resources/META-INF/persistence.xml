@@ -1,0 +1,22 @@
+<persistence
+	xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+	<persistence-unit name="rdmPersistenceUnit" transaction-type="JTA">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/ReferenceDataServiceDS)</jta-data-source>
+		<class>com.scb.rdm.entity.CountryCode</class>
+		<class>com.scb.rdm.entity.CurrencyCode</class>
+		<class>com.scb.rdm.entity.id.CountryKey</class>
+		<class>com.scb.rdm.entity.id.CurrencyKey</class>
+		<class>com.scb.rdm.entity.StandardCode</class>
+		<class>com.scb.rdm.entity.StandardCodePicklist</class>
+		<class>com.scb.rdm.entity.StandardCodePicklistValue</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<!-- Specify dialect -->
+			<property name="openjpa.jdbc.DBDictionary" value="oracle" />
+		</properties>
+	</persistence-unit>
+</persistence>
