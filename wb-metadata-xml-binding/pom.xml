@@ -1,12 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.scb.edmi</groupId>
-		<artifactId>edmi-commons</artifactId>
-		<version>trunk-SNAPSHOT</version>
-	</parent>
-	<artifactId>metadata-xml-binding</artifactId>
+	<groupId>com.scb.edmi</groupId>
+	<version>1.0.0</version>	
+	<artifactId>wb-metadata-xml-binding</artifactId>
 	<name>SCBML Header XML Binding using JAXB</name>
 	<description>JAXB Binding Beans Generated for the SCBML Header used by EDMi Standard Payload</description>
 	<build>

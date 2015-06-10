@@ -2,16 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.scb.rdm</groupId>
-	<artifactId>rdm-currency-jaxb</artifactId>
-	<version>trunk-SNAPSHOT</version>
-	<name>RDM Currency XML Schema Binding using JAXB Binding Beans</name>
-	<description>RDM Currency XML Schema Binding using JAXB Binding Beans</description>
+	<artifactId>wb-rdm-currency-jaxb</artifactId>
+	<version>1.0.0</version>
+	<name>WB RDM Currency XML Schema Binding using JAXB Binding Beans</name>
+	<description>WB RDM Currency XML Schema Binding using JAXB Binding Beans</description>
 	
 	<dependencies>
 		<dependency>
 			<groupId>com.scb.edmi</groupId>
-			<artifactId>metadata-xml-binding</artifactId>
-			<version>trunk-SNAPSHOT</version>
+			<artifactId>wb-metadata-xml-binding</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 	
