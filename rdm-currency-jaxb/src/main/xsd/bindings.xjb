@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings version="2.1" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+
+	<jxb:globalBindings>
+		<!-- use Calendar instead of XMLGregorianCalendar -->
+		<jxb:javaType name="java.util.Calendar" xmlType="xs:dateTime"
+			parseMethod="com.scb.edmi.xml.bind.DateTypeConverter.parseDateTime"
+			printMethod="com.scb.edmi.xml.bind.DateTypeConverter.printDateTime" />
+
+	</jxb:globalBindings>
+
+	<jxb:bindings schemaLocation="cur.xsd">
+		<jxb:schemaBindings>
+      <jxb:nameXmlTransform>
+        <jxb:elementName suffix="Element"/>
+      </jxb:nameXmlTransform>
+    </jxb:schemaBindings>
+	</jxb:bindings>
+
+</jxb:bindings>

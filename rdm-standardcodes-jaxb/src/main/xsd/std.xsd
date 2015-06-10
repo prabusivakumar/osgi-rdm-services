@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sc.com/referenceData/v1/standardCode" xmlns:std="http://www.sc.com/referenceData/v1/standardCode">
+  <xsd:element name="standardCodeInfo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="stdCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="stdCodeDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="stdCodeDefinition" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="stdCodeType" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="stdCodeTypeDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="parentStdCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="parentStdDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="parentStdDefinition" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="parentReferenceTableId" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="parentReferenceTableName" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="stdCodeEffectiveDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="stdCodeEndDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="stdEntityState" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="stdCodeVersion" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="stdCodeCreatedDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="stdCodeModifiedDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="sourceIdentifier" form="qualified" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

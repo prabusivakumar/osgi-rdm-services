@@ -27,3 +27,17 @@ http://<hostname>:8181/cxf/rdm/standardCode/getCustomerIsicCode
 http://<hostname>:8181/cxf/rdm/standardCode/getCustomerLegalConstitutionCode
 http://<hostname>:8181/cxf/rdm/standardCode/getCustomerBaselSegmentCode
 http://<hostname>:8181/cxf/rdm/standardCode/getCustomerBaselSubSegmentCode
+
+
+# wb-rdm-workflow
+Reference Data Management Workflow using OSGi and Apache Camel EIP
+
+# Dependencies for wb-rdm-workflow
+JBossFuse:karaf@root> install wrap:mvn:com.scb.edmi/metadata-xml-binding/trunk-SNAPSHOT
+JBossFuse:karaf@root> install wrap:mvn:com.scb.rdm/rdm-country-jaxb/trunk-SNAPSHOT
+JBossFuse:karaf@root> install wrap:mvn:com.scb.rdm/rdm-currency-jaxb/trunk-SNAPSHOT
+JBossFuse:karaf@root> install wrap:mvn:com.scb.rdm/rdm-standardcodes-jaxb/trunk-SNAPSHOT
+JBossFuse:karaf@root> install mvn:com.scb.wb/wb-lib-generic-repository/1.0.0
+JBossFuse:karaf@root> install mvn:com.scb.rdm/wb-rdm-repository/1.0.0
+JBossFuse:karaf@root> install mvn:com.scb.rdm/wb-rdm-workflow/1.0.0
+

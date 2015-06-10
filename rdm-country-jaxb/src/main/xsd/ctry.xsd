@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sc.com/referenceData/v1/country" xmlns:ctry="http://www.sc.com/referenceData/v1/country">
+  <xsd:element name="countryInfo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="countryCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="countryCodeDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="isoCodeIndicator" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="internalCountryRegionCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="internalCountryRegionDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="isoAlpha2CountryCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="isoAlpha3CountryCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="isoNumericCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="npcIndicator" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="calenderTypeCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="hemisphereCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="hemisphereCodeDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="dataCustodianIndicator" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="creationCrId" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="lastModifiedCrId" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="referenceTableId" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="countryCodeEffectiveDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="countryCodeEndDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="countryCodeEntityState" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="countryCodeVersion" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="countryCodeCreatedDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="countryCodeModifiedDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="sourceIdentifier" form="qualified" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

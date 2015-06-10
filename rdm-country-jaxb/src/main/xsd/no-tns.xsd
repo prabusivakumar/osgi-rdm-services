@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://www.sc.com/SCBML-1" xmlns:ctry="http://www.sc.com/referenceData/v1/country">
+  <xsd:import namespace="http://www.sc.com/SCBML-1" schemaLocation="ns.xsd"/>
+  <xsd:import namespace="http://www.sc.com/referenceData/v1/country" schemaLocation="ctry.xsd"/>
+  <xsd:complexType name="publishCountryRequest">
+    <xsd:sequence>
+      <xsd:element ref="ns:header"/>
+      <xsd:element ref="ns:publishCountryReqPayload"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="country">
+    <xsd:sequence>
+      <xsd:element ref="ctry:countryInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
