@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sc.com/SCBML-1" xmlns:ns="http://www.sc.com/SCBML-1">
+  <xsd:import schemaLocation="no-tns.xsd"/>
+  <xsd:element name="SCBML" type="publishCountryRequest"/>
+  <xsd:element name="header" nillable="true" type="ns:docTypeRef_ns_SCBMLHeaderType"/>
+  <xsd:element name="recordCount" nillable="true" type="xsd:string"/>
+  <xsd:element name="genericReferentialHeader" nillable="true">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ns:recordCount" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="publishCountryReqPayload" nillable="true" type="ns:publishCountryReqPayload"/>
+  <xsd:complexType name="docTypeRef_ns_SCBMLHeaderType">
+    <xsd:sequence>
+      <xsd:element name="messageDetails" form="qualified" type="ns:docTypeRef_ns_messageDetailsType"/>
+      <xsd:element name="originationDetails" form="qualified" type="ns:docTypeRef_ns_originationDetailsType"/>
+      <xsd:element name="captureSystem" form="qualified" type="xsd:string"/>
+      <xsd:element name="process" form="qualified" type="ns:docTypeRef_ns_ProcessType"/>
+      <xsd:element name="metadata" form="qualified" type="ns:docTypeRef_ns_tagsType" minOccurs="0"/>
+      <xsd:element name="messageHistory" form="qualified" type="ns:docTypeRef_ns_messageHistoryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="exceptions" form="qualified" type="ns:docTypeRef_ns_ExceptionListType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_messageDetailsType">
+    <xsd:sequence>
+      <xsd:element name="messageVersion" form="qualified">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:pattern value="[0-9]*[0-9]*[0-9].[0-9]"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="messageType" form="qualified" type="ns:docTypeRef_ns_messageType"/>
+      <xsd:element name="multiMessage" form="qualified" type="ns:docTypeRef_ns_multiMessageType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_messageType">
+    <xsd:sequence>
+      <xsd:element name="typeName" form="qualified" type="xsd:string"/>
+      <xsd:element name="subType" form="qualified">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="subTypeName" form="qualified" type="xsd:string"/>
+          </xsd:sequence>
+          <xsd:attribute name="subTypeScheme" type="xsd:anyURI"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_multiMessageType">
+    <xsd:sequence>
+      <xsd:element name="multiMessageKnown" form="qualified" type="ns:docTypeRef_ns_multiMessageKnownType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_multiMessageKnownType">
+    <xsd:sequence>
+      <xsd:element name="multiMessageCount" form="qualified" type="xsd:integer"/>
+      <xsd:element name="messagePosition" form="qualified" type="xsd:integer"/>
+      <xsd:element name="messageOrder" form="qualified" type="ns:MessageOrderEnum"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="MessageOrderEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:whiteSpace value="collapse"/>
+      <xsd:enumeration value="FIFO"/>
+      <xsd:enumeration value="LIFO"/>
+      <xsd:enumeration value="Random"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="docTypeRef_ns_originationDetailsType">
+    <xsd:sequence>
+      <xsd:element name="messageSender" form="qualified" type="ns:docTypeRef_ns_messageSenderType"/>
+      <xsd:element name="messageTimestamp" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="initiatedTimestamp" form="qualified" type="xsd:dateTime"/>
+      <xsd:element name="trackingId" form="qualified" type="xsd:string"/>
+      <xsd:element name="correlationID" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="conversationID" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="customSearchID" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="batchID" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="serviceBusID" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="validFrom" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="validTo" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="timeToLive" form="qualified" type="xsd:time" minOccurs="0"/>
+      <xsd:element name="priority" form="qualified" type="ns:PriorityTypeEnum" minOccurs="0"/>
+      <xsd:element name="checksum" form="qualified" type="ns:docTypeRef_ns_checksumType" minOccurs="0"/>
+      <xsd:element name="compressionAlgorithm" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="encoding" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="possibleDuplicate" form="qualified" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_messageSenderType">
+    <xsd:sequence>
+      <xsd:element name="messageSender" form="qualified">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="systemScheme" type="xsd:anyURI"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="senderDomain" form="qualified" type="ns:docTypeRef_ns_senderDomainType"/>
+      <xsd:element name="countryCode" form="qualified" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_senderDomainType">
+    <xsd:sequence>
+      <xsd:element name="domainName" form="qualified">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="domainNameScheme" type="xsd:anyURI"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="subDomainName" form="qualified">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="subDomainType" form="qualified" type="xsd:string"/>
+          </xsd:sequence>
+          <xsd:attribute name="subdomainNameScheme" type="xsd:anyURI"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="PriorityTypeEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:whiteSpace value="collapse"/>
+      <xsd:enumeration value="0"/>
+      <xsd:enumeration value="1"/>
+      <xsd:enumeration value="2"/>
+      <xsd:enumeration value="3"/>
+      <xsd:enumeration value="4"/>
+      <xsd:enumeration value="5"/>
+      <xsd:enumeration value="6"/>
+      <xsd:enumeration value="7"/>
+      <xsd:enumeration value="8"/>
+      <xsd:enumeration value="9"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="docTypeRef_ns_checksumType">
+    <xsd:sequence>
+      <xsd:element name="checksum" form="qualified" type="xsd:string"/>
+      <xsd:element name="hashAlgorithm" form="qualified" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_ProcessType">
+    <xsd:sequence>
+      <xsd:element name="processName" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="eventType" form="qualified" type="xsd:string"/>
+      <xsd:element name="lifecycleState" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="workflowState" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="action" form="qualified" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_tagsType">
+    <xsd:sequence>
+      <xsd:element name="tag" form="qualified" type="ns:docTypeRef_ns_tagType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="metadataScheme" type="xsd:anyURI"/>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_tagType">
+    <xsd:sequence>
+      <xsd:element name="key" form="qualified">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="keyNameScheme" type="xsd:anyURI"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="value" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="anyValue" form="qualified" type="xsd:anyType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_messageHistoryType">
+    <xsd:sequence>
+      <xsd:element name="timestamp" form="qualified" type="xsd:dateTime"/>
+      <xsd:element name="logMessage" form="qualified" type="xsd:string"/>
+      <xsd:element name="messageSource" form="qualified" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_ExceptionListType">
+    <xsd:sequence>
+      <xsd:element name="exception" form="qualified" type="ns:docTypeRef_ns_ExceptionType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="docTypeRef_ns_ExceptionType">
+    <xsd:sequence>
+      <xsd:element name="timestamp" form="qualified" type="xsd:dateTime"/>
+      <xsd:element name="code" form="qualified">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="exceptionCodeScheme" type="xsd:anyURI"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="description" form="qualified" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="publishCountryReqPayload">
+    <xsd:sequence>
+      <xsd:element name="payloadFormat" form="qualified" type="ns:PayloadFormatEnum"/>
+      <xsd:element name="payloadVersion" form="qualified" type="xsd:string"/>
+      <xsd:element ref="ns:genericReferentialHeader"/>
+      <xsd:element name="publishCountryReq" nillable="true" type="country" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="PayloadFormatEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:whiteSpace value="collapse"/>
+      <xsd:enumeration value="XML"/>
+      <xsd:enumeration value="CSV"/>
+      <xsd:enumeration value="Binary"/>
+      <xsd:enumeration value="FileReference"/>
+      <xsd:enumeration value="Text"/>
+      <xsd:enumeration value="NotApplicable"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

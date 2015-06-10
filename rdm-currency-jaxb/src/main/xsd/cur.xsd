@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sc.com/referenceData/v1/currency" xmlns:cur="http://www.sc.com/referenceData/v1/currency">
+  <xsd:element name="currencyInfo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="currencyCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="currencyCodeDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="isoAlpha3CurrencyCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="isoCodeIndicator" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="PSGLStandardCurrencyIndicator" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="dataCustodianIndicator" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="exchangeRateIndicator" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="countryCode" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="countryDescription" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="exchangeRateDenomination" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="currencyRoundingDecimalPlace" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="creationCrId" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="lastModifiedCrId" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="referenceTableId" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="currencyCodeEffectiveDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="currencyCodeEndDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="countryCodeEntityState" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="currencyCodeVersion" form="qualified" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="currencyCodeCreatedDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="currencyCodeModifiedDate" form="qualified" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="sourceIdentifier" form="qualified" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

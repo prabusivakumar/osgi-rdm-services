@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://www.sc.com/SCBML-1"
+	xmlns:std="http://www.sc.com/referenceData/v1/standardCode">
+	<xsd:import namespace="http://www.sc.com/SCBML-1" schemaLocation="ns.xsd" />
+	<xsd:import namespace="http://www.sc.com/referenceData/v1/standardCode"
+		schemaLocation="std.xsd" />
+	<xsd:complexType name="publishStandardCodesRequest">
+		<xsd:sequence>
+			<xsd:element ref="ns:header" />
+			<xsd:element ref="ns:publishStandardCodesReqPayload" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="standardCode">
+		<xsd:sequence>
+			<xsd:element ref="std:standardCodeInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
+
+
+
+
+

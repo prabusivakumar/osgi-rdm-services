@@ -12,6 +12,10 @@
 		<module>wb-rdm-repository</module>
 		<module>wb-rdm-rest</module>
 		<module>wb-rdm-workflow</module>
+		<module>metadata-xml-binding</module>
+		<module>rdm-country-jaxb</module>
+		<module>rdm-currency-jaxb</module>
+		<module>rdm-standardcodes-jaxb</module>
 	</modules>
 
 	<distributionManagement>
