@@ -2,6 +2,9 @@ package com.scb.rdm;
 
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -14,18 +17,18 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.scb.rdm.entity.CountryCode;
-import com.scb.rdm.repository.CountryRepository;
+import com.scb.rdm.entity.CurrencyCode;
 import com.scb.rdm.repository.impl.CountryRepositoryImpl;
+import com.scb.rdm.repository.impl.CurrencyRepositoryImpl;
 
 public class TestRepository {
 
-	@Mock
-	private CountryRepository countryRepository;
-
-	
 	@InjectMocks
 	private CountryRepositoryImpl counttryRepositoryImpl;
-	
+
+	@InjectMocks
+	private CurrencyRepositoryImpl currencyRepositoryImpl;
+
 	@Mock
 	private EntityManager entityManager;
 
@@ -35,8 +38,7 @@ public class TestRepository {
 	}
 
 	/**
-	 * This test case is used to test when there is an exception occured during
-	 * commit.
+	 * This test case is used to test the Country Repository
 	 * 
 	 * @throws Throwable
 	 */
@@ -47,46 +49,30 @@ public class TestRepository {
 		when(entityManager.createNamedQuery("findByCountryCode")).thenReturn(
 				queryMock);
 		when(queryMock.setParameter(1, "HK")).thenReturn(queryMock);
-		when(queryMock.getSingleResult()).thenReturn(countryCode);
+		List<CountryCode> resultList = new ArrayList<CountryCode>();
+		resultList.add(countryCode);
+		when(queryMock.getResultList()).thenReturn(resultList);
 		CountryCode cd = this.counttryRepositoryImpl.findByCountryCode("HK");
 		Assert.assertNotNull(cd);
 	}
 
-	// /**
-	// * This test is used to check the success scenario where a Platform
-	// * Transaction Manager is null. This will result in Committing the
-	// * transaction.
-	// *
-	// * @throws NoSuchMethodException
-	// * @throws SecurityException
-	// */
-	//
-	// @Test
-	// public void testCasePlatFormTxnMgrNull() throws NoSuchMethodException,
-	// SecurityException {
-	// // platformTransactionManager = null;
-	// final MethodSignature signature = Mockito.mock(MethodSignature.class);
-	// final PlatformTransactionManager platformTransactionManager = Mockito
-	// .mock(PlatformTransactionManager.class);
-	// final Method method = TransactionTest.class.getMethod("add", null);
-	// when(proceedingJoinPoint.getSignature()).thenReturn(signature);
-	// when(signature.getName()).thenReturn("persist");
-	// when(signature.getMethod()).thenReturn(method);
-	// when(
-	// serviceLocator
-	// .getServiceReference(PlatformTransactionManager.class))
-	// .thenReturn(platformTransactionManager);
-	// final Object object = this.transactionalAspect
-	// .execute(proceedingJoinPoint);
-	// Assert.assertNull(object);
-	// }
-	//
-	// public static class TransactionTest {
-	//
-	// @TransactionalContext(propagation = Propagation.REQUIRED)
-	// public void add() {
-	//
-	// }
-	// }
+	/**
+	 * This test case is used to test the Currency Repository.
+	 * 
+	 * @throws Throwable
+	 */
+	@Test
+	public void testCaseCurrencyRepository() throws Throwable {
+		final Query queryMock = Mockito.mock(Query.class);
+		final CurrencyCode currencyCode = Mockito.mock(CurrencyCode.class);
+		when(entityManager.createNamedQuery("findByCurrencyCode")).thenReturn(
+				queryMock);
+		when(queryMock.setParameter(1, "SGD")).thenReturn(queryMock);
+		List<CurrencyCode> resultList = new ArrayList<CurrencyCode>();
+		resultList.add(currencyCode);
+		when(queryMock.getResultList()).thenReturn(resultList);
+		CurrencyCode cd = this.currencyRepositoryImpl.findByCurrencyCode("SGD");
+		Assert.assertNotNull(cd);
+	}
 
 }

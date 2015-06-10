@@ -1,0 +1,97 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<bean id="activemq" class="org.apache.camel.component.jms.JmsComponent">
+	  <property name="configuration" ref="jmsConfig" /> 
+	</bean>
+	  
+	 <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"> 
+      <property name="connectionFactory" ref="jmsConnectionFactory"/> 
+  	</bean> 
+  	
+	  <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	    <property name="brokerURL" value="tcp://localhost:6616"/>
+	  </bean>
+	  
+	  <bean id="interfaceMessageProcessor" class="com.scb.rdm.camel.processor.InterfaceMessageProcessor">
+	  	<property name="interfaceMessageRepository">
+			<reference interface="com.scb.rdm.repository.InterfaceMessageRepository" availability="mandatory" />
+		</property>	  	
+	  </bean>
+	  
+	  <bean id="countryCodeRequestProcessor" class="com.scb.rdm.camel.processor.country.PublishCountryCodeRequestProcessor">
+	  	<!-- Inject the Country Repository through Blueprint Dependency Injection -->
+		<property name="countryRepository">
+			<reference interface="com.scb.rdm.repository.CountryRepository" availability="mandatory" />
+		</property>
+	  </bean>
+	  
+	  <bean id="currencyCodeRequestProcessor" class="com.scb.rdm.camel.processor.currency.PublishCurrencyCodeRequestProcessor">
+	  	<!-- Inject the Currency Repository through Blueprint Dependency Injection -->
+		<property name="currencyRepository">
+			<reference interface="com.scb.rdm.repository.CurrencyRepository" availability="mandatory" />
+		</property>
+	  </bean>
+	  
+	  <bean id="standardCodeRequestProcessor" class="com.scb.rdm.camel.processor.standardCode.PublishStandardCodeRequestProcessor">
+	  	<!-- Inject the Standard Code Repository through Blueprint Dependency Injection -->
+		<property name="standardCodePicklistRepository">
+			<reference interface="com.scb.rdm.repository.StandardCodePicklistRepository" availability="mandatory" />
+		</property>
+		<property name="standardCodeTransformer" ref="standardCodeTransformer" />
+	  </bean>
+	  
+	  <bean id="standardCodeTransformer" class="com.scb.rdm.camel.processor.standardCode.StandardCodeTransformer">
+	  	<!-- Inject the Standard Code Picklist Repository through Blueprint Dependency Injection -->
+		<property name="standardCodePicklistRepository">
+			<reference interface="com.scb.rdm.repository.StandardCodePicklistRepository" availability="mandatory" />
+		</property>
+		<!-- Inject the Standard Code Picklist Value Repository through Blueprint Dependency Injection -->
+		<property name="standardCodePicklistValueRepository">
+			<reference interface="com.scb.rdm.repository.StandardCodePicklistValueRepository" availability="mandatory" />
+		</property>
+	  </bean>
+	  
+	  <camelContext xmlns="http://camel.apache.org/schema/blueprint">	  
+	  <dataFormats>
+	    <jaxb id="countryDataFormat" prettyPrint="true" contextPath="com.scb.rdm.xml.country.binding"/>
+	    <jaxb id="currencyDataFormat" prettyPrint="true" contextPath="com.scb.rdm.xml.currency.binding"/>
+	    <jaxb id="standardCodeDataFormat" prettyPrint="true" contextPath="com.scb.rdm.xml.standard.binding"/>
+	  </dataFormats>
+		<route id="JMSCountryRoute">
+		    <from uri="activemq:topic:scbRdmCountryNotifyV1T" />
+		    <log message="LOG Host : ${headers.host} , OperationName : ${headers.operationName}" />
+		    <log message="LOG Body : ${body} " />		
+		    <process ref="interfaceMessageProcessor"/>
+		    <log message="LOG Body Processor: ${body}" />
+		    <unmarshal ref="countryDataFormat" />    
+		    <log message="LOG Body Unmarshalled: ${body}" />		    
+		    <process ref="countryCodeRequestProcessor"/>
+		    <log message="LOG Body Country Processor: ${body}" />
+		</route>
+		<route id="JMSCurrencyRoute">
+		    <from uri="activemq:topic:scbRdmCurrencyNotifyV1T" />
+		    <log message="LOG Host : ${headers.host} , OperationName : ${headers.operationName}" />
+		    <log message="LOG Body : ${body} " />		
+		    <process ref="interfaceMessageProcessor"/>
+		    <log message="LOG Body Processor: ${body}" />
+		    <unmarshal ref="currencyDataFormat" />    
+		    <log message="LOG Body Unmarshalled: ${body}" />		    
+		    <process ref="currencyCodeRequestProcessor"/>
+		    <log message="LOG Body Currency Processor: ${body}" />
+		</route>
+		<route id="JMSStandardCodeRoute">
+		    <from uri="activemq:topic:scbRdmStandardCodesNotifyV1T" />
+		    <log message="LOG Host : ${headers.host} , OperationName : ${headers.operationName}" />
+		    <log message="LOG Body : ${body} " />	
+		    <process ref="interfaceMessageProcessor"/>
+		    <log message="LOG Body Processor: ${body}" />	
+		    <unmarshal ref="standardCodeDataFormat" />    
+		    <log message="LOG Body Unmarshalled: ${body}" />
+		    <process ref="standardCodeRequestProcessor"/>
+		    <log message="LOG Body Standard Code Processor: ${body}" />
+		</route>
+    </camelContext>     
+    
+	
+</blueprint>

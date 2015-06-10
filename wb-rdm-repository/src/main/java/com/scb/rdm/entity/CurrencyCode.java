@@ -5,6 +5,7 @@ import com.scb.rdm.entity.id.CurrencyKey;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -19,15 +20,19 @@ import java.util.Date;
  * @since 30-Jan-15
  */
 @Entity
-@NamedQuery(name = "findByCurrencyCode", query = "select e from CurrencyCode e where e.currencyKey.currencyCode = ?1")
+@NamedQuery(name = "findByCurrencyCode", query = "select e from CurrencyCode e where e.currencyCode = ?1")
 @Table(name = "CURRENCY_CODE")
 public class CurrencyCode implements Serializable {
 
 	/** Default SerialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private CurrencyKey currencyKey;
+	@Id
+	@Column(name = "CURRENCY_CODE", length = 24)
+	private String currencyCode;
+
+	@Column(name = "VERSION")
+	private Integer version;	
 
 	@Column(name = "CURRENCY_DESC", length = 500)
 	private String currencyCodeDescription;
@@ -80,23 +85,37 @@ public class CurrencyCode implements Serializable {
 	@Column(name = "SOURCE_ID", length = 20)
 	private String sourceId;
 
-	public CurrencyCode() {
-		this.currencyKey = new CurrencyKey();
+	public CurrencyCode() {		
 	}
 
 	/**
-	 * @return the currencyKey
+	 * @return the currencyCode
 	 */
-	public CurrencyKey getCurrencyKey() {
-		return currencyKey;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
 	/**
-	 * @param currencyKey
-	 *            the currencyKey to set
+	 * @param currencyCode
+	 *            the currencyCode to set
 	 */
-	public void setCurrencyKey(CurrencyKey currencyKey) {
-		this.currencyKey = currencyKey;
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+
+	/**
+	 * @return the version
+	 */
+	public Integer getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version
+	 *            the version to set
+	 */
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 	/**
@@ -353,6 +372,7 @@ public class CurrencyCode implements Serializable {
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -371,12 +391,12 @@ public class CurrencyCode implements Serializable {
 		result = prime
 				* result
 				+ ((createdTimeStamp == null) ? 0 : createdTimeStamp.hashCode());
+		result = prime * result
+				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
 		result = prime
 				* result
 				+ ((currencyCodeDescription == null) ? 0
 						: currencyCodeDescription.hashCode());
-		result = prime * result
-				+ ((currencyKey == null) ? 0 : currencyKey.hashCode());
 		result = prime
 				* result
 				+ ((currencyRoundingDecimalPlace == null) ? 0
@@ -416,6 +436,7 @@ public class CurrencyCode implements Serializable {
 				+ ((referenceTableId == null) ? 0 : referenceTableId.hashCode());
 		result = prime * result
 				+ ((sourceId == null) ? 0 : sourceId.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 
@@ -449,16 +470,16 @@ public class CurrencyCode implements Serializable {
 				return false;
 		} else if (!createdTimeStamp.equals(other.createdTimeStamp))
 			return false;
+		if (currencyCode == null) {
+			if (other.currencyCode != null)
+				return false;
+		} else if (!currencyCode.equals(other.currencyCode))
+			return false;
 		if (currencyCodeDescription == null) {
 			if (other.currencyCodeDescription != null)
 				return false;
 		} else if (!currencyCodeDescription
 				.equals(other.currencyCodeDescription))
-			return false;
-		if (currencyKey == null) {
-			if (other.currencyKey != null)
-				return false;
-		} else if (!currencyKey.equals(other.currencyKey))
 			return false;
 		if (currencyRoundingDecimalPlace == null) {
 			if (other.currencyRoundingDecimalPlace != null)
@@ -521,6 +542,11 @@ public class CurrencyCode implements Serializable {
 			if (other.sourceId != null)
 				return false;
 		} else if (!sourceId.equals(other.sourceId))
+			return false;
+		if (version == null) {
+			if (other.version != null)
+				return false;
+		} else if (!version.equals(other.version))
 			return false;
 		return true;
 	}

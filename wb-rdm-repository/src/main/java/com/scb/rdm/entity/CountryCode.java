@@ -4,15 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.scb.rdm.entity.id.CountryKey;
 import com.scb.rdm.type.Status;
 
 /**
@@ -23,7 +22,7 @@ import com.scb.rdm.type.Status;
  */
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "findByCountryCode", query = "select e from CountryCode e where e.key.countryCode = ?1"),
+		@NamedQuery(name = "findByCountryCode", query = "select e from CountryCode e where e.countryCode = ?1"),
 		@NamedQuery(name = "findByInternalCountryRegionCodeAndStatus", query = "select e from CountryCode e where e.internalCountryRegionCode = ?1 and e.status = ?2") })
 @Table(name = "COUNTRY_CODE")
 public class CountryCode implements Serializable {
@@ -31,8 +30,12 @@ public class CountryCode implements Serializable {
 	/** Default SerialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private CountryKey key;
+	@Id
+	@Column(name = "COUNTRY_CODE", length = 24)
+	private String countryCode;
+	
+	@Column(name = "VERSION")
+	private Integer version;
 
 	@Column(name = "COUNTRY_DESC", length = 500)
 	private String countryCodeDescription;
@@ -93,22 +96,37 @@ public class CountryCode implements Serializable {
 	private Status status;
 
 	public CountryCode() {
-		this.key = new CountryKey();
+		
 	}
 
 	/**
-	 * @return the key
+	 * @return the countryCode
 	 */
-	public CountryKey getKey() {
-		return key;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
 	/**
-	 * @param key
-	 *            the key to set
+	 * @param countryCode
+	 *            the countryCode to set
 	 */
-	public void setKey(CountryKey key) {
-		this.key = key;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	/**
+	 * @return the version
+	 */
+	public Integer getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version
+	 *            the version to set
+	 */
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 	/**
@@ -396,6 +414,8 @@ public class CountryCode implements Serializable {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -404,6 +424,8 @@ public class CountryCode implements Serializable {
 		result = prime
 				* result
 				+ ((calendarTypeCode == null) ? 0 : calendarTypeCode.hashCode());
+		result = prime * result
+				+ ((countryCode == null) ? 0 : countryCode.hashCode());
 		result = prime
 				* result
 				+ ((countryCodeDescription == null) ? 0
@@ -445,7 +467,6 @@ public class CountryCode implements Serializable {
 				+ ((isoIndicator == null) ? 0 : isoIndicator.hashCode());
 		result = prime * result
 				+ ((isoNumericCode == null) ? 0 : isoNumericCode.hashCode());
-		result = prime * result + ((key == null) ? 0 : key.hashCode());
 		result = prime * result
 				+ ((modifiedOn == null) ? 0 : modifiedOn.hashCode());
 		result = prime * result
@@ -456,6 +477,7 @@ public class CountryCode implements Serializable {
 		result = prime * result
 				+ ((sourceId == null) ? 0 : sourceId.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 
@@ -472,6 +494,11 @@ public class CountryCode implements Serializable {
 			if (other.calendarTypeCode != null)
 				return false;
 		} else if (!calendarTypeCode.equals(other.calendarTypeCode))
+			return false;
+		if (countryCode == null) {
+			if (other.countryCode != null)
+				return false;
+		} else if (!countryCode.equals(other.countryCode))
 			return false;
 		if (countryCodeDescription == null) {
 			if (other.countryCodeDescription != null)
@@ -540,11 +567,6 @@ public class CountryCode implements Serializable {
 				return false;
 		} else if (!isoNumericCode.equals(other.isoNumericCode))
 			return false;
-		if (key == null) {
-			if (other.key != null)
-				return false;
-		} else if (!key.equals(other.key))
-			return false;
 		if (modifiedOn == null) {
 			if (other.modifiedOn != null)
 				return false;
@@ -566,6 +588,11 @@ public class CountryCode implements Serializable {
 		} else if (!sourceId.equals(other.sourceId))
 			return false;
 		if (status != other.status)
+			return false;
+		if (version == null) {
+			if (other.version != null)
+				return false;
+		} else if (!version.equals(other.version))
 			return false;
 		return true;
 	}

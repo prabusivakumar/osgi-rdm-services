@@ -78,6 +78,7 @@
 						<Export-Package>
 							com.scb.rdm.repository,
 							com.scb.rdm.entity,
+							com.scb.rdm.entity.id,
 							com.scb.rdm.type
 						</Export-Package>
 						<Meta-Persistence>/META-INF/persistence.xml</Meta-Persistence>
