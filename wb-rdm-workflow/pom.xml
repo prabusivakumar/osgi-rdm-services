@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.scb.rdm</groupId>
+	<version>2.0.0</version>
+	<artifactId>wb-rdm-workflow</artifactId>
+	<packaging>bundle</packaging>
+	<name>WB Reference Data Management Workflow</name>
+	<description>WB Reference Data Management Workflow using Blueprint Specifications</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.scb.rdm</groupId>
+			<artifactId>rdm-country-jaxb</artifactId>
+			<version>trunk-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.scb.rdm</groupId>
+			<artifactId>rdm-currency-jaxb</artifactId>
+			<version>trunk-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.scb.rdm</groupId>
+			<artifactId>rdm-standardcodes-jaxb</artifactId>
+			<version>trunk-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.scb.rdm</groupId>
+			<artifactId>wb-rdm-repository</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.scb.workflow</groupId>
+			<artifactId>workflow-integration</artifactId>
+			<version>trunk-SNAPSHOT</version>
+		</dependency>-->
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2.7</version>
+		</dependency>
+
+		<!-- slf4j Dependencies -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+
+		<!-- This dependencies is used for -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Camel JMS Component related changes -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-blueprint</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jaxb</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+
+		<!-- Lombok Dependencies -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.14.8</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Maven Compiler Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<!-- Maven Bundle Plugin -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Include-Resource>{maven-resources}</Include-Resource>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Import-Package>
+							*
+						</Import-Package>
+						<DynamicImport-Package>*</DynamicImport-Package>
+						<Export-Package>
+							
+						</Export-Package>						
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
