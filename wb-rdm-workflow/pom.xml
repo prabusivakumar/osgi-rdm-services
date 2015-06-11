@@ -11,18 +11,18 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.scb.rdm</groupId>
-			<artifactId>rdm-country-jaxb</artifactId>
-			<version>trunk-SNAPSHOT</version>
+			<artifactId>wb-rdm-country-jaxb</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.scb.rdm</groupId>
-			<artifactId>rdm-currency-jaxb</artifactId>
-			<version>trunk-SNAPSHOT</version>
+			<artifactId>wb-rdm-currency-jaxb</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.scb.rdm</groupId>
-			<artifactId>rdm-standardcodes-jaxb</artifactId>
-			<version>trunk-SNAPSHOT</version>
+			<artifactId>wb-rdm-standardcodes-jaxb</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.scb.rdm</groupId>
